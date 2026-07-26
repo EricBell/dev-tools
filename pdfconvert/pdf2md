@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+exec uv run --with pymupdf --with rapidocr-onnxruntime --with numpy python "$DIR/pdf_to_markdown.py" "$@"
