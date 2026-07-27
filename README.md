@@ -9,6 +9,7 @@ This README catalogs the tools and resources in this directory. It is intended f
 | `pdfconvert/` | Converts PDFs into structured Markdown with layout-aware text extraction, basic formatting preservation, table reconstruction, and OCR fallback. | `README.md`, `PROCEDURE.md`, `pdf2md`, `pdf_to_markdown.py` | Use when source material is in PDF form and needs to become Markdown for downstream reading, ingestion, or LLM workflows. |
 | `tool-catalog-maintainer/` | ICM tool/Agent Skill for creating and maintaining living `README.md` catalogs for folders of reusable tools/resources. | `CONTEXT.md`, `SKILL.md`, `references/catalog-format.md`, `README.md` | Use when asked to catalog, index, summarize, or update documentation for a folder containing tool subfolders. |
 | `video-align/` | Uses WhisperX to transcribe/align video or audio and converts WhisperX JSON output into utterance-level and word-level CSV files. | `README.md`, `run-whisperx.sh`, `make-csvs.py`, `pyproject.toml` | Use when aligning spoken media to timestamps or when a WhisperX JSON transcript needs CSV exports. |
+| `wake-on-lan/` | Sends a Wake-on-LAN magic packet to a machine on the local network. | `README.md`, `wol.py` | Use when you need to wake a sleeping host from the LAN with a tiny `uv`-run Python script. |
 
 ## Tools
 
