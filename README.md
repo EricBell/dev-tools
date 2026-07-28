@@ -8,6 +8,7 @@ This README catalogs the tools and resources in this directory. It is intended f
 | --- | --- | --- | --- |
 | `pdfconvert/` | Converts PDFs into structured Markdown with layout-aware text extraction, basic formatting preservation, table reconstruction, and OCR fallback. | `README.md`, `PROCEDURE.md`, `pdf2md`, `pdf_to_markdown.py` | Use when source material is in PDF form and needs to become Markdown for downstream reading, ingestion, or LLM workflows. |
 | `tool-catalog-maintainer/` | ICM tool/Agent Skill for creating and maintaining living `README.md` catalogs for folders of reusable tools/resources. | `CONTEXT.md`, `SKILL.md`, `references/catalog-format.md`, `README.md` | Use when asked to catalog, index, summarize, or update documentation for a folder containing tool subfolders. |
+| `url_monitor/` | Repeatedly pings a host/IP to a timestamped log and analyzes that log for timeout outages and recording gaps. | `README.md`, `ping_to_file.sh`, `analyze_ping_log.py` | Use when monitoring internet/host reachability over time or summarizing ping logs for disconnections. |
 | `video-align/` | Uses WhisperX to transcribe/align video or audio and converts WhisperX JSON output into utterance-level and word-level CSV files. | `README.md`, `run-whisperx.sh`, `make-csvs.py`, `pyproject.toml` | Use when aligning spoken media to timestamps or when a WhisperX JSON transcript needs CSV exports. |
 | `wake-on-lan/` | Sends a Wake-on-LAN magic packet to a machine on the local network. | `README.md`, `wol.py` | Use when you need to wake a sleeping host from the LAN with a tiny `uv`-run Python script. |
 
@@ -60,6 +61,32 @@ None noted. This is primarily a prompt/workflow tool driven by Markdown instruct
 
 **Notes:**  
 `CONTEXT.md` is the source of truth. `README.md` is intentionally short to avoid duplicating the operating contract.
+
+### `url_monitor/`
+
+**Purpose:**  
+Small shell/Python reachability monitor. It appends timestamped `ping` results for a host/IP to a log file and analyzes the log for timeout-based disconnections and missing-record gaps.
+
+**Contents:**
+- `README.md` — overview, examples, log format, dependencies, and cautions
+- `ping_to_file.sh` — Bash logger that repeatedly pings a target and writes one line per attempt
+- `analyze_ping_log.py` — Python analyzer for outage and recording-gap summaries
+
+**Use when:**  
+Use to monitor internet or host reachability over time, then summarize when timeouts occurred and whether the logger stopped or paused.
+
+**Setup / dependencies:**  
+Requires Bash, the system `ping` command, and Python 3.10+. No third-party Python packages are required.
+
+**Notes:**  
+Run from the repository root with paths like:
+
+```bash
+./tools/url_monitor/ping_to_file.sh 8.8.8.8 /tmp/ping.log
+./tools/url_monitor/analyze_ping_log.py /tmp/ping.log
+```
+
+Despite the folder name, the monitor uses ICMP ping reachability for a host/IP, not HTTP status checks for full URL paths.
 
 ### `video-align/`
 
