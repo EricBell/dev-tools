@@ -13,7 +13,7 @@ import re
 import socket
 from pathlib import Path
 
-TARGET_IP = "192.168.1.137"
+TARGET_IP =  "192.168.1.114" # "192.168.1.137"
 TARGET_MAC = "84-47-09-71-CB-6D" # "84:9e:56:07:fb:d3"
 SUBNET_PREFIX = 24
 BROADCAST_PORT = 9
