@@ -6,6 +6,7 @@ This README catalogs the tools and resources in this directory. It is intended f
 
 | Tool / Folder | Purpose | Key Files | When to Use |
 | --- | --- | --- | --- |
+| `repo-file-count.sh` | Counts files (Git blobs) in a GitHub repository’s default branch using `gh` and `jq`. | `repo-file-count.sh` | Use when you need a quick file-count estimate for a GitHub repo without cloning it. |
 | `pdfconvert/` | Converts PDFs into structured Markdown with layout-aware text extraction, basic formatting preservation, table reconstruction, and OCR fallback. | `README.md`, `PROCEDURE.md`, `pdf2md`, `pdf_to_markdown.py` | Use when source material is in PDF form and needs to become Markdown for downstream reading, ingestion, or LLM workflows. |
 | `tool-catalog-maintainer/` | ICM tool/Agent Skill for creating and maintaining living `README.md` catalogs for folders of reusable tools/resources. | `CONTEXT.md`, `SKILL.md`, `references/catalog-format.md`, `README.md` | Use when asked to catalog, index, summarize, or update documentation for a folder containing tool subfolders. |
 | `url_monitor/` | Repeatedly pings a host/IP to a timestamped log and analyzes that log for timeout outages and recording gaps. | `README.md`, `ping_to_file.sh`, `analyze_ping_log.py` | Use when monitoring internet/host reachability over time or summarizing ping logs for disconnections. |
@@ -13,6 +14,27 @@ This README catalogs the tools and resources in this directory. It is intended f
 | `wake-on-lan/` | Sends a Wake-on-LAN magic packet to a machine on the local network. | `README.md`, `wol.py` | Use when you need to wake a sleeping host from the LAN with a tiny `uv`-run Python script. |
 
 ## Tools
+
+### `repo-file-count.sh`
+
+**Purpose:**  
+Small Bash helper that asks GitHub for a repository’s default branch, fetches that branch’s recursive tree, and counts entries of type `blob` to report the number of files.
+
+**Contents:**
+- `repo-file-count.sh` — Bash script for counting files in a GitHub repo
+
+**Use when:**  
+Use when you need a lightweight count of files in a GitHub repository and already have GitHub CLI access.
+
+**Setup / dependencies:**  
+Requires Bash, the GitHub CLI (`gh`), and `jq`. You must be authenticated to GitHub CLI for private repos.
+
+**Notes:**  
+The script currently expects repository coordinates as separate owner/repo arguments, even though its usage message says `<owner/repo>`. Example:
+
+```bash
+./repo-file-count.sh owner repo
+```
 
 ### `pdfconvert/`
 
