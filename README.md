@@ -8,6 +8,7 @@ This README catalogs the tools and resources in this directory. It is intended f
 | --- | --- | --- | --- |
 | `repo-file-count.sh` | Counts files (Git blobs) in a GitHub repository’s default branch using `gh` and `jq`. | `repo-file-count.sh` | Use when you need a quick file-count estimate for a GitHub repo without cloning it. |
 | `pdfconvert/` | Converts PDFs into structured Markdown with layout-aware text extraction, basic formatting preservation, table reconstruction, and OCR fallback. | `README.md`, `PROCEDURE.md`, `pdf2md`, `pdf_to_markdown.py` | Use when source material is in PDF form and needs to become Markdown for downstream reading, ingestion, or LLM workflows. |
+| `reflow-markdown/` | Agent Skill that unwraps hard-wrapped paragraphs in a markdown/text file (e.g. copy-pasted from a Google Doc or PDF) into single flowing lines, preserving headers, list items, links, and blank-line spacing. | `SKILL.md` | Use when a file has paragraphs broken into short fixed-width lines and needs to be reflowed into normal single-line paragraphs without changing content. |
 | `tool-catalog-maintainer/` | ICM tool/Agent Skill for creating and maintaining living `README.md` catalogs for folders of reusable tools/resources. | `CONTEXT.md`, `SKILL.md`, `references/catalog-format.md`, `README.md` | Use when asked to catalog, index, summarize, or update documentation for a folder containing tool subfolders. |
 | `url_monitor/` | Repeatedly pings a host/IP to a timestamped log and analyzes that log for timeout outages and recording gaps. | `README.md`, `ping_to_file.sh`, `analyze_ping_log.py` | Use when monitoring internet/host reachability over time or summarizing ping logs for disconnections. |
 | `video-align/` | Uses WhisperX to transcribe/align video or audio and converts WhisperX JSON output into utterance-level and word-level CSV files. | `README.md`, `run-whisperx.sh`, `make-csvs.py`, `pyproject.toml` | Use when aligning spoken media to timestamps or when a WhisperX JSON transcript needs CSV exports. |
@@ -62,6 +63,23 @@ Run from the repository root with paths like:
 ```
 
 Use `--page-markers` only when page boundary comments/rules are needed.
+
+### `reflow-markdown/`
+
+**Purpose:**  
+Agent Skill (prompt-driven, no code) for reflowing hard-wrapped markdown/text paragraphs — text wrapped at a fixed column so lines break mid-sentence — into single, naturally flowing lines, while leaving headers, blank-line spacing, list items, and links untouched.
+
+**Contents:**
+- `SKILL.md` — skill definition: what to preserve, what to change, and the paragraph-by-paragraph reflow workflow
+
+**Use when:**  
+Use when a markdown or plain text file was copy-pasted from a Google Doc, PDF export, or similar source and has paragraphs broken into short fixed-width lines that need to become normal single-line paragraphs.
+
+**Setup / dependencies:**  
+None. This is a Claude Agent Skill (Markdown instructions), not a script — invoke it as a skill rather than running a file.
+
+**Notes:**  
+Formatting-only: wording, punctuation, and capitalization are not changed. List items and Q/A-style units that were themselves wrapped across lines should be treated as one unit to unwrap.
 
 ### `tool-catalog-maintainer/`
 
